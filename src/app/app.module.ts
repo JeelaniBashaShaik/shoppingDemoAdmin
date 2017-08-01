@@ -10,6 +10,7 @@ import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdminLandingComponent } from './admin-landing/admin-landing.component';
+import { FireBaseService } from './shared/fire-base.service';
 
 
 @NgModule({
@@ -18,11 +19,11 @@ import { AdminLandingComponent } from './admin-landing/admin-landing.component';
     AdminLandingComponent
   ],
   imports: [
-    BrowserModule,AppRoutingModule,FormsModule,
+    BrowserModule,AppRoutingModule,FormsModule,HttpModule,
     AngularFireModule.initializeApp(environment.firebase)
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA],
-  providers: [AngularFireDatabase],
+  providers: [AngularFireDatabase,FireBaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,14 +1,59 @@
-<a class="waves-effect waves-light btn" href="#modal1">Add Product</a>
-<a class="waves-effect waves-light btn" href="#modal2">Add Category</a>
+
 <!-- <a class="waves-effect waves-light btn" href="#modal2">Update Product</a> -->
 
-  <!-- Modal Structure -->
-  <div id="modal1" class="modal">
-    <div class="modal-content">
-      <h4>Add Product</h4>
-      <div class="row">
-    <form class="col s12">
-     
+
+<div class="row">
+    <div class="col s12">
+      <ul class="tabs">
+        <li class="tab col s3"><a href="#test1">Create Hierarchy</a></li>
+        <li class="tab col s3"><a href="#test2">Add Category</a></li>
+        <li class="tab col s3"><a href="#test3">Add SubCategory</a></li>
+        <li class="tab col s3"><a href="#test4">Add Product</a></li>
+      </ul>
+    </div>
+    <div id="test1" style="margin-left:10%;" class="col s4"> 
+        <input type="text" [(ngModel)]="Level1" placeholder="Level1 Name">
+        <input type="text" [(ngModel)]="Level2" placeholder="Level2 Name">  
+        <input type="text" [(ngModel)]="Level3" placeholder="Level3 Name">
+        <a class="waves-effect waves-light btn" (click)="createHierarchy()">Create</a>
+      </div>
+    <div id="test2" style="margin-left:2%;margin-top:2%" class="col s12"> 
+          <a class='dropdown-button btn' data-activates='dropdown2'>Select Department</a>
+  
+   <ul id='dropdown2' class='dropdown-content'>
+    <li *ngFor="let x of allDepartmentsList" (click)="selectDepartment(x)"><a>{{x}}</a></li>
+  </ul>
+
+  <input type="text" style="margin-left:22%" [(ngModel)]="newCategoryName"  placeholder="Category Name">
+
+  <a class="waves-effect waves-light btn" style="margin-left:22%" (click)="createCategory()">Create</a>
+</div>
+
+    <div id="test3" style="margin-left:2%;margin-top:2%" class="col s12">
+
+ <a class='dropdown-button btn' data-activates='dropdown4'>Select Department</a>
+  
+   <ul id='dropdown4' class='dropdown-content'>
+    <li *ngFor="let x of allDepartmentsList" (click)="selectDepartment(x)"><a>{{x}}</a></li>
+  </ul>
+
+{{selectedDepartment}}
+
+
+
+
+      <a class='dropdown-button btn' data-activates='dropdown1'>Select Category</a>
+  
+   <ul id='dropdown1' class='dropdown-content'>
+    <li *ngFor="let x of allCategoriesList" (click)="selectCategory(x)"><a>{{x}}</a></li>
+  </ul>
+{{selectedCategory}}
+  <input type="text" style="margin-left:44%" [(ngModel)]="newSubCategoryName"  placeholder="Sub-Category Name">
+
+  <a class="waves-effect waves-light btn" style="margin-left:44%" (click)="createSubCategory()">Create</a>
+    </div>
+    <div id="test4" class="col s12">
+       <form class="col s12">
       <div class="row">
         <div class="input-field col s6">
           <i class="material-icons prefix">info_outline</i>
@@ -47,7 +92,7 @@
 
         <div class="input-field col s6">
           <i class="material-icons prefix">settings_input_component</i>
-          <input id="productFeatures" type="text" name="productFeatures" [(ngModel)]="productToBeAdded.productFeatures" class="validate">
+          <input id="productFeatures" type="text" name="productFeatures" [(ngModel)]="productToBeAdded.productFeatures[0]" class="validate">
           <label for="productFeatures">Product Features</label>
         </div>
       </div>
@@ -65,68 +110,45 @@
           <label for="productPriceArray">Product Image </label>
         </div>
       </div>
-
-    </form>
-  </div>
-    </div>
-    <div class="modal-footer">
-      <button class="modal-action modal-close waves-effect waves-green btn-flat" (click)="addProduct()">Save</button>
-      <button class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</button>
-    </div>
+<a class="waves-effect waves-light btn" (click)="addProduct()">Add Product</a>
+    </form></div>
   </div>
 
-<div id="modal2" class="modal">
+
+
+
+
+
+  <div id="modal3" class="modal">
     <div class="modal-content">
-      <h4>Update Product</h4>
-      <div class="row">
-
-<button class='dropdown-button btn'  data-activates='dropdown2'>Select Id</button>
-
-<button class='dropdown-button btn'  data-activates='dropdown1'>Select Property</button>
-
-  <!-- Dropdown Structure -->
-  <ul id='dropdown1' class='dropdown-content'>
-   
-    <li *ngFor="let id of allProductProperties" (click)="selectProperty(id)">{{id}}</li>
-
+      <h4>Create New Hierarchy</h4>
+     <!--    <div class="input-field col s12">
+    <select>
+      <option *ngFor="let n of y">{{n}}</option>
+      <option value="ad">Hello</option>
+      <option value="ac">bello</option>
+    </select>
+    <label>Select an Existing Department</label>
+  </div> -->
+  
+  <select>
+    <option *ngFor="let x of y">{{x}}</option>
+  </select>
+  <ul>
+    <li *ngFor="let x of y">{{x}}</li>
   </ul>
-{{selectedPropertyToUpdate}}
-
-
-<ul id='dropdown2' class='dropdown-content'>
-   
-    <li *ngFor="let id of allProductIds" (click)="selectId(id)">{{id}}</li>
-
-  </ul>
-{{selectedIdToUpdate}}
-
-
-           <div class="input-field col s6">
-          <i class="material-icons prefix">group_work</i>
-          <input id="changedValue" type="text" name="changedValue" [(ngModel)]="changedValue" class="validate">
-          <label>Value </label>
-        </div>
-  </div>
-
+        <!-- <input type="text" [(ngModel)]="Level2" placeholder="Level2 Name">  
+        <input type="text" [(ngModel)]="Level3" placeholder="Level3 Name"> -->
 
     </div>
     <div class="modal-footer">
-      <button class="modal-action modal-close waves-effect waves-green btn-flat" (click)="updateProduct(changedValue,selectedPropertyToUpdate)">Save</button>
-      <button class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</button>
-    </div>
-  </div>  
-
-   <div id="modal2" class="modal">
-    <div class="modal-content">
-      <h4>Modal Header</h4>
-      <p>A bunch of text</p>
-    </div>
-    <div class="modal-footer">
-      <p class="modal-action modal-close waves-effect waves-green btn-flat">Agree</p>
+      <p class="modal-action modal-close waves-effect waves-green btn-flat" >
+        Create
+      </p>
     </div>
   </div>
 
-    <vaadin-grid id="grid2" [(items)]="users" selection-mode="multi"   column-reordering-allowed="" frozen-columns="0">
+   <!--  <vaadin-grid id="grid2" [(items)]="users" selection-mode="multi"   column-reordering-allowed="" frozen-columns="0">
       <table>
         <colgroup>
           <col name="productId" sortable>
@@ -139,4 +161,4 @@
 
         </colgroup>
   </table>
-    </vaadin-grid>
+    </vaadin-grid> -->
