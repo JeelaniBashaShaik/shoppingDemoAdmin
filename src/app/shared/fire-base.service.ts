@@ -18,4 +18,18 @@ export class FireBaseService {
   fetchSubCategories(){
       return this.http.get('https://samplesite-dd655.firebaseio.com/Lists/SubCategoriesList.json').map(res => res.json())
   }
+
+
+  fetchSpecificDepartment(department){
+      return this.http.get('https://samplesite-dd655.firebaseio.com/Products_List/'+ department + '.json').map(res => res.json())
+  }
+
+    fetchSpecificCategory(department,category){
+      return this.http.get('https://samplesite-dd655.firebaseio.com/Products_List/'+ department + '/' + category + '/' + '.json').map(res => res.json())
+  }
+
+  fetchSpecificSubCategory(d,c,s){
+      return this.http.get('https://samplesite-dd655.firebaseio.com/Products_List/'+ d + '/' + c + '/' + s + '/'+ '.json').map(res => res.json())
+  }
+
 }

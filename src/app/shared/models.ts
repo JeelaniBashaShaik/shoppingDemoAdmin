@@ -1,7 +1,10 @@
 
 export class Product{
     productId:string;
+    productName:string;
     productImage:String;
+    productDiscount:number;
+    productActualPrice:number;
     productCurrentPrice:Number;
     productShortDescription:String;
     productLongDescription:String;
@@ -16,6 +19,9 @@ export class Product{
     productRating:ProductRating;
     productInCarts:number;
     productInWishLists:number=0;
+    parentSubCategory:string;
+    parentCateogry:string;
+    parentDepartment:string;
 
 }
 

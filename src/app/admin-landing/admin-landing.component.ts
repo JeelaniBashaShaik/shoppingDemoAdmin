@@ -38,13 +38,14 @@ x= ['123','456'];
     this.subCategoriesList = db.list('/Lists/SubCategoriesList');
 
   }
+isDeparmentSelected:boolean;
 
   ngAfterViewInit(){
     this.set();
   }
 
   ngOnInit() {
-
+this.isDeparmentSelected = false;
   $('.modal').modal();
    $('.dropdown-button').dropdown({
       inDuration: 300,
@@ -61,17 +62,35 @@ x= ['123','456'];
 ;
 $('select').material_select();
 
+//this.fetchSpecificCategory();
+/* var data = {"A Key": 34, "Another Key": 16, "Last Key": 10};
+
+var data1 = [],
+    data2 = [];
+
+for (var property in data) {
+
+   if ( ! data.hasOwnProperty(property)) {
+      continue;
+   }
+
+   data1.push(property);
+   data2.push(data[property]);
 
 
+}
 
-  }
-
+console.log(data1);
+console.log(data2);
+ */  }
+data3=[];
 selectCategory(v){
   
   this.selectedCategory= v;
 }
 selectDepartment(v){
   this.selectedDepartment = v;
+  //this.isDepartmentSelected = true;
 }
 xyz;
 set(){
@@ -117,17 +136,18 @@ this.fb.fetchCategories().subscribe(data=>{
   arr1 = arr2;
 this.allCategoriesList = $.map(arr1, function(el) { return el })
 this.y = this.allCategoriesList;
-console.log(this.y);
+//console.log(this.y);
 })
 }
 
 fetchDepartments(){
+  this.allDepartmentsList = [];
   this.fb.fetchDepartments().subscribe(data=>{
   var arr1;
   var arr2:Observable<any[]> = data;
   arr1 = arr2;
 this.allDepartmentsList = $.map(arr1, function(el) { return el })
-console.log(this.allDepartmentsList);
+//console.log(this.allDepartmentsList);
 })
 }
 
@@ -137,14 +157,81 @@ fetchSubCategories(){
   var arr2:Observable<any[]> = data;
   arr1 = arr2;
 this.allSubCategoriesList = $.map(arr1, function(el) { return el })
-console.log(this.allSubCategoriesList);
+//console.log(this.allSubCategoriesList);
 })
 }
 
 
+fetchSpecificDepartment(){
+  console.log(this.selectedDepartment);
+  this.allCategoriesList=[];
+  this.allDepartmentsList=[];
+  this.fb.fetchSpecificDepartment(this.selectedDepartment).subscribe(data=>{
+    for(var category in data){
+      if( !data.hasOwnProperty(category)){
+        continue
+      }
+      this.selectedDepartmentsList.push(category);
+      this.allCategoriesList.push(category);
+    }
+     //this.allCategoriesList = this.selectedCategoriesList;
+    console.log(this.allCategoriesList);
+    console.log(this.selectedDepartmentsList);
+  })
+}
 
+selectedDepartmentsList=[];
+selectedCategoriesList=[];
+
+chooseDepartment(x){
+  this.isDeparmentSelected = true;
+  this.selectedDepartment = x;
+  this.fetchSpecificDepartment();
+  
+}
+
+chooseCategory(x){
+  this.isCategorySelected = true;
+  this.selectedCategory = x;
+  this.fetchSpecificCategory();
+}
+
+chooseSubCategory(x){
+  this.selectedSubCategory = x;
+  this.fetchSpecificSubCategory();
+}
+isCategorySelected:boolean;
+selectedSubCategory;
+fetchSpecificCategory(){
+console.log(this.selectedCategory);
+this.selectedCategoriesList=[];
+  this.fb.fetchSpecificCategory(this.selectedDepartment, this.selectedCategory).subscribe(data=>{
+    for(var category in data){
+      if( !data.hasOwnProperty(category)){
+        continue
+      }
+      this.selectedCategoriesList.push(category);
+    
+    }
+   
+    console.log(this.selectedCategoriesList);
+  })
+}
+
+fetchSpecificSubCategory(){
+  console.log(this.selectedSubCategory);
+  this.selectedSubCategorieList=[];
+  this.fb.fetchSpecificSubCategory(this.selectedDepartment,this.selectedCategory,this.selectedSubCategory).subscribe(data=>{
+    for(var SubCategory in data){
+      if( !data.hasOwnProperty(SubCategory)){
+        continue;
+      }this.selectedSubCategorieList.push(SubCategory);
+    }console.log(this.selectedSubCategorieList);
+  })
+}
+selectedSubCategorieList=[];
   addProduct(){
-     this.products = this.db.list('/Products_List/'+this.productToBeAdded.productCategory);
+     this.products = this.db.list('/Products_List/'+this.selectedDepartment + '/'+ this.selectedCategory + '/' + this.selectedSubCategory);
      if(this.productToBeAdded != null){
         console.log(this.productToBeAdded);
         this.productToBeAdded.productInCarts = 0;

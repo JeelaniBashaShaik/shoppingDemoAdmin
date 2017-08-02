@@ -6,9 +6,9 @@
     <div class="col s12">
       <ul class="tabs">
         <li class="tab col s3"><a href="#test1">Create Hierarchy</a></li>
-        <li class="tab col s3"><a href="#test2">Add Category</a></li>
-        <li class="tab col s3"><a href="#test3">Add SubCategory</a></li>
-        <li class="tab col s3"><a href="#test4">Add Product</a></li>
+        <li class="tab col s3"><a href="#test2" (click)="fetchDepartments()">Add Category</a></li>
+        <li class="tab col s3"><a href="#test3" (click)="fetchDepartments()">Add SubCategory</a></li>
+        <li class="tab col s3"><a href="#test4" (click)="fetchDepartments()"> Add Product</a></li>
       </ul>
     </div>
     <div id="test1" style="margin-left:10%;" class="col s4"> 
@@ -34,26 +34,60 @@
  <a class='dropdown-button btn' data-activates='dropdown4'>Select Department</a>
   
    <ul id='dropdown4' class='dropdown-content'>
-    <li *ngFor="let x of allDepartmentsList" (click)="selectDepartment(x)"><a>{{x}}</a></li>
+    <li *ngFor="let x of allDepartmentsList" (click)="chooseDepartment(x)"><a>{{x}}</a></li>
   </ul>
 
-{{selectedDepartment}}
+<!-- {{selectedDepartment}} -->
 
 
 
 
-      <a class='dropdown-button btn' data-activates='dropdown1'>Select Category</a>
+      <button class='dropdown-button btn' data-activates='dropdown1' [disabled]="!isDeparmentSelected">Select Category</button>
   
    <ul id='dropdown1' class='dropdown-content'>
-    <li *ngFor="let x of allCategoriesList" (click)="selectCategory(x)"><a>{{x}}</a></li>
+    <li *ngFor="let x of allCategoriesList" (click)="chooseCategory(x)"><a>{{x}}</a></li>
   </ul>
-{{selectedCategory}}
+<!-- {{selectedCategory}} -->
+<!-- <div class="row">
+<Label>Selected Department:</Label>{{selectedDepartment}}
+<Label>Selected Category:</Label>{{selectedCategory}}</div> -->
   <input type="text" style="margin-left:44%" [(ngModel)]="newSubCategoryName"  placeholder="Sub-Category Name">
 
   <a class="waves-effect waves-light btn" style="margin-left:44%" (click)="createSubCategory()">Create</a>
     </div>
     <div id="test4" class="col s12">
        <form class="col s12">
+  
+         <div class="row">
+        <div class="input-field col s3">
+          <a class='dropdown-button btn' data-activates='dropdown4'>Select Department</a>
+  
+   <ul id='dropdown4' class='dropdown-content'>
+    <li *ngFor="let x of allDepartmentsList" (click)="chooseDepartment(x)"><a>{{x}}</a></li>
+  </ul>{{selectedDepartment}}
+        </div>
+
+        <div class="input-field col s3">
+          <button class='dropdown-button btn' data-activates='dropdown1' [disabled]="!isDeparmentSelected">Select Category</button>
+  
+   <ul id='dropdown1' class='dropdown-content'>
+    <li *ngFor="let x of allCategoriesList" (click)="chooseCategory(x)"><a>{{x}}</a></li>
+  </ul>{{selectedCategory}}
+        </div>
+
+
+<div class="input-field col s3">
+          <button class='dropdown-button btn' data-activates='dropdown5' [disabled]="!isCategorySelected">Select SubCategory</button>
+  
+   <ul id='dropdown5' class='dropdown-content'>
+    <li *ngFor="let x of selectedCategoriesList" (click)="chooseSubCategory(x)"><a>{{x}}</a></li>
+  </ul>{{selectedSubCategory}}
+        </div>
+
+      </div>
+
+
+
       <div class="row">
         <div class="input-field col s6">
           <i class="material-icons prefix">info_outline</i>
