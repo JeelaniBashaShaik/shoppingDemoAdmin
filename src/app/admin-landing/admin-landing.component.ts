@@ -104,6 +104,7 @@ createSubCategory(){
   this.subCategoriesList.push(this.newSubCategoryName);
   this.products = this.db.list('/Products_List/'+this.selectedDepartment+'/'+this.selectedCategory+'/'+this.newSubCategoryName);
   this.products.push('');
+  this.flushAllVariables();
 }
 newCategoryName;
 newSubCategoryName;
@@ -113,6 +114,7 @@ createCategory(){
   this.categoriesList.push(this.newCategoryName);
   this.products =this.db.list('/Products_List/'+this.selectedDepartment+'/'+this.newCategoryName);
   this.products.push('');
+  this.flushAllVariables();
 }
 createHierarchy(){
 this.products = this.db.list('/Products_List/'+this.Level1+'/'+this.Level2+'/'+this.Level3);
@@ -124,7 +126,7 @@ console.log('/Products_List/'+this.Level1+'/'+this.Level2+'/'+this.Level3);
  if(this.Level1 && this.Level2 && this.Level3){
   Materialize.toast('Hierarchy Created Successfully', 2000)
  }
- 
+ this.flushAllVariables();
 }
 
 
@@ -238,10 +240,27 @@ selectedSubCategorieList=[];
         this.productToBeAdded.productInWishLists = 0;
         this.products.push(this.productToBeAdded);
         Materialize.toast('Product Added Successfully', 2000)
+        
       }
     else{
         Materialize.toast('Please enter proper details', 2000)
     }
+      this.flushAllVariables();
   }
 
+
+  flushAllVariables(){
+    this.Level1 = null;
+    this.Level2=null;
+    this.Level3=null;
+    this.Level4=null;
+    this.allCategoriesList=[];
+    this.allSubCategoriesList=[];
+    this.selectCategory = null;
+    this.selectDepartment = null;
+    this.selectedSubCategory  = null;
+    this.selectedCategoriesList = [];
+    this.selectedSubCategorieList=[];
+    this.productToBeAdded = null;
+  }
 }

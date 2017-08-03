@@ -119,15 +119,29 @@
 
       <div class="row">
         <div class="input-field col s6">
-          <i class="material-icons prefix">view_quilt</i>
-          <input id="productCategory" type="text" name="productCategory" [(ngModel)]="productToBeAdded.productCategory" class="validate">
-          <label for="productCatergory">Product Category</label>
+          <i class="material-icons prefix">settings_input_component</i>
+          <input id="productFeatures" type="text" name="productFeatures" [(ngModel)]="productToBeAdded.productFeatures[0]" class="validate">
+          <label for="productFeatures">Product Feature1</label>
         </div>
 
         <div class="input-field col s6">
           <i class="material-icons prefix">settings_input_component</i>
-          <input id="productFeatures" type="text" name="productFeatures" [(ngModel)]="productToBeAdded.productFeatures[0]" class="validate">
-          <label for="productFeatures">Product Features</label>
+          <input id="productFeatures" type="text" name="productFeatures" [(ngModel)]="productToBeAdded.productFeatures[1]" class="validate">
+          <label for="productFeatures">Product Feature2</label>
+        </div>
+      </div>
+
+       <div class="row">
+        <div class="input-field col s6">
+          <i class="material-icons prefix">settings_input_component</i>
+          <input id="productFeatures" type="text" name="productFeatures" [(ngModel)]="productToBeAdded.productFeatures[2]" class="validate">
+          <label for="productFeatures">Product Feature3</label>
+        </div>
+
+        <div class="input-field col s6">
+          <i class="material-icons prefix">settings_input_component</i>
+          <input id="productFeatures" type="text" name="productFeatures" [(ngModel)]="productToBeAdded.productFeatures[3]" class="validate">
+          <label for="productFeatures">Product Feature4</label>
         </div>
       </div>
 
@@ -140,8 +154,8 @@
 
         <div class="input-field col s6">
           <i class="material-icons prefix">group_work</i>
-          <input id="productPriceArray" type="text" name="productArray" [(ngModel)]="productToBeAdded.productImage" class="validate">
-          <label for="productPriceArray">Product Image </label>
+          <input id="productImage" type="text" name="productImage" [(ngModel)]="productToBeAdded.productImage" class="validate">
+          <label for="productImage">Product Image </label>
         </div>
       </div>
 <a class="waves-effect waves-light btn" (click)="addProduct()">Add Product</a>
