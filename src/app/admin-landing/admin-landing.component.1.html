@@ -1,0 +1,206 @@
+
+<!-- <a class="waves-effect waves-light btn" href="#modal2">Update Product</a> -->
+
+
+<div class="row">
+    <div class="col s12">
+      <ul class="tabs">
+        <li class="tab col s3"><a href="#test1">Create Hierarchy</a></li>
+        <li class="tab col s3"><a href="#test2" (click)="flushAllVariables();fetchDepartments();">Add Category</a></li>
+        <!-- <li class="tab col s3"><a href="#test3" (click)="flushAllVariables();fetchDepartments();">Add SubCategory</a></li> -->
+        <li class="tab col s3"><a href="#test4" (click)="flushAllVariables();fetchDepartments();"> Add Product</a></li>
+      </ul>
+    </div>
+    <div id="test1" style="margin-left:10%;" class="col s4"> 
+        <input type="text" [(ngModel)]="t1DepartmentName" placeholder="Department Name">
+        <input type="text" [(ngModel)]="t1CategoryName" placeholder="Category Name">  
+        <input type="text" [(ngModel)]="t1SubCategoryName" placeholder="Sub Category Name">
+        <a class="waves-effect waves-light btn" (click)="createHierarchy()">Create</a>
+      </div>
+    <div id="test2" style="margin-left:2%;margin-top:2%" class="col s12"> 
+          <a class='dropdown-button btn' data-activates='dropdown2'>Select Department</a>
+          <ul id='dropdown2' class='dropdown-content'>
+            <li *ngFor="let x of allDepartmentsList" (click)="t2SelectDepartment(x)"><a>{{x}}</a></li>
+          </ul>
+          <input type="text" style="margin-left:22%" [(ngModel)]="t2CategoryName"  placeholder="Category Name">
+          <a class="waves-effect waves-light btn" style="margin-left:22%" (click)="createCategory()">Create</a>
+    </div>
+
+    <div id="test3" style="margin-left:2%;margin-top:2%" class="col s12">
+
+     <button class='dropdown-button btn' data-activates='abc'>Select Department</button>
+  <!--  <ul id='abc' class='dropdown-content'>
+    <li *ngFor="let x of allDepartmentsList" (click)="chooseDepartment(x)"><a>{{x}}</a></li>
+  </ul> -->
+  <p *nFor= "let x of allDepartmentsList">{{x}</p]>
+
+<!-- {{selectedDepartment}} -->
+
+     <!--  <button class='dropdown-button btn' data-activates='dropdown1' [disabled]="!isDeparmentSelected">Select Category</button> -->
+  
+  <!--  <ul id='dropdown1' class='dropdown-content'>
+    <li *ngFor="let y of allCategoriesList" (click)="chooseCategory(y)"><a>{{y}}</a></li>
+  </ul> -->
+<!-- {{selectedCategory}} -->
+<!-- <div class="row">
+<Label>Selected Department:</Label>{{selectedDepartment}}
+<Label>Selected Category:</Label>{{selectedCategory}}</div> -->
+  <!-- <input type="text" style="margin-left:44%" [(ngModel)]="newSubCategoryName"  placeholder="Sub-Category Name"> -->
+
+ <!--  <a class="waves-effect waves-light btn" style="margin-left:44%" (click)="createSubCategory()">Create</a> -->
+    </div>
+    <div id="test4" class="col s12">
+       <form class="col s12">
+  
+         <div class="row">
+        <div class="input-field col s3">
+          <a class='dropdown-button btn' data-activates='dropdown4'>Select Department</a>
+  
+   <ul id='dropdown4' class='dropdown-content'>
+    <li *ngFor="let x of allDepartmentsList" (click)="chooseDepartment(x)"><a>{{x}}</a></li>
+  </ul>{{selectedDepartment}}
+        </div>
+
+        <div class="input-field col s3">
+          <button class='dropdown-button btn' data-activates='dropdown1' [disabled]="!isDeparmentSelected">Select Category</button>
+  
+   <ul id='dropdown1' class='dropdown-content'>
+    <li *ngFor="let x of allCategoriesList" (click)="chooseCategory(x)"><a>{{x}}</a></li>
+  </ul>{{selectedCategory}}
+        </div>
+
+
+<div class="input-field col s3">
+          <button class='dropdown-button btn' data-activates='dropdown5' [disabled]="!isCategorySelected">Select SubCategory</button>
+  
+   <ul id='dropdown5' class='dropdown-content'>
+    <li *ngFor="let x of selectedCategoriesList" (click)="chooseSubCategory(x)"><a>{{x}}</a></li>
+  </ul>{{selectedSubCategory}}
+        </div>
+
+      </div>
+
+
+
+      <div class="row">
+        <div class="input-field col s6">
+          <i class="material-icons prefix">info_outline</i>
+          <input id="productId" type="text" name="productId" [(ngModel)]="productToBeAdded.productId" class="validate">
+          <label for="productId">ProductId</label>
+        </div>
+
+        <div class="input-field col s6">
+          <i class="material-icons prefix">polymer</i>
+          <input id="productCurrentPrice" type="text" name="productCurrentPrice" [(ngModel)]="productToBeAdded.productCurrentPrice" class="validate">
+          <label for="productCurrentPrice">Product Current Price</label>
+        </div>
+      </div>
+
+      
+      <div class="row">
+        <div class="input-field col s6">
+          <i class="material-icons prefix">subject</i>
+          <input id="productShortDescription" type="text" name="productShortDescription" [(ngModel)]="productToBeAdded.productShortDescription" class="validate">
+          <label for="productShortDescription">Product Short Description</label>
+        </div>
+
+        <div class="input-field col s6">
+          <i class="material-icons prefix">comment</i>
+          <input id="productLongDescription" type="text" name="productLongDescription" [(ngModel)]="productToBeAdded.productLongDescription" class="validate">
+          <label for="productLongDescription">Product Long Description</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s6">
+          <i class="material-icons prefix">settings_input_component</i>
+          <input id="productFeatures" type="text" name="productFeatures" [(ngModel)]="productToBeAdded.productFeatures[0]" class="validate">
+          <label for="productFeatures">Product Feature1</label>
+        </div>
+
+        <div class="input-field col s6">
+          <i class="material-icons prefix">settings_input_component</i>
+          <input id="productFeatures" type="text" name="productFeatures" [(ngModel)]="productToBeAdded.productFeatures[1]" class="validate">
+          <label for="productFeatures">Product Feature2</label>
+        </div>
+      </div>
+
+       <div class="row">
+        <div class="input-field col s6">
+          <i class="material-icons prefix">settings_input_component</i>
+          <input id="productFeatures" type="text" name="productFeatures" [(ngModel)]="productToBeAdded.productFeatures[2]" class="validate">
+          <label for="productFeatures">Product Feature3</label>
+        </div>
+
+        <div class="input-field col s6">
+          <i class="material-icons prefix">settings_input_component</i>
+          <input id="productFeatures" type="text" name="productFeatures" [(ngModel)]="productToBeAdded.productFeatures[3]" class="validate">
+          <label for="productFeatures">Product Feature4</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s6">
+          <i class="material-icons prefix">games</i>
+          <input id="productBrand" type="text" name="productBrand" [(ngModel)]="productToBeAdded.productBrand" class="validate">
+          <label for="productBrand">Product Brand</label>
+        </div>
+
+        <div class="input-field col s6">
+          <i class="material-icons prefix">group_work</i>
+          <input id="productImage" type="text" name="productImage" [(ngModel)]="productToBeAdded.productImage" class="validate">
+          <label for="productImage">Product Image </label>
+        </div>
+      </div>
+<a class="waves-effect waves-light btn" (click)="addProduct()">Add Product</a>
+    </form></div>
+  </div>
+
+
+
+
+
+
+  <div id="modal3" class="modal">
+    <div class="modal-content">
+      <h4>Create New Hierarchy</h4>
+     <!--    <div class="input-field col s12">
+    <select>
+      <option *ngFor="let n of y">{{n}}</option>
+      <option value="ad">Hello</option>
+      <option value="ac">bello</option>
+    </select>
+    <label>Select an Existing Department</label>
+  </div> -->
+  
+  <select>
+    <option *ngFor="let x of y">{{x}}</option>
+  </select>
+  <ul>
+    <li *ngFor="let x of y">{{x}}</li>
+  </ul>
+        <!-- <input type="text" [(ngModel)]="Level2" placeholder="Level2 Name">  
+        <input type="text" [(ngModel)]="Level3" placeholder="Level3 Name"> -->
+
+    </div>
+    <div class="modal-footer">
+      <p class="modal-action modal-close waves-effect waves-green btn-flat" >
+        Create
+      </p>
+    </div>
+  </div>
+
+   <!--  <vaadin-grid id="grid2" [(items)]="users" selection-mode="multi"   column-reordering-allowed="" frozen-columns="0">
+      <table>
+        <colgroup>
+          <col name="productId" sortable>
+          <col name="productCurrentPrice" sortable>
+          <col name="productCategory" sortable>
+          <col name="productInCarts" sortable>
+          <col name="productInWishLists" sortable>
+          <col name="productRating" sortable>
+          <col name="productBrand" sortable>
+
+        </colgroup>
+  </table>
+    </vaadin-grid> -->

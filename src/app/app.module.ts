@@ -11,12 +11,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdminLandingComponent } from './admin-landing/admin-landing.component';
 import { FireBaseService } from './shared/fire-base.service';
+import { AddProductComponent } from './add-product/add-product.component';
+import { ViewCatalogComponent } from './view-catalog/view-catalog.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    AdminLandingComponent
+    AdminLandingComponent,
+    AddProductComponent,
+    ViewCatalogComponent
   ],
   imports: [
     BrowserModule,AppRoutingModule,FormsModule,HttpModule,
